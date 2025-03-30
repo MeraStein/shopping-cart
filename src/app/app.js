@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <img src="${product.image}" alt="${product.title}" class="product-image">
                 <div class="product-text">
                     <span>${product.title}</span>
-                    <p>price: <span>${product.price}</span></p>
+                    <p>price: <span>${product.price}$</span></p>
                     <div class="quantity-text">
                         <input type="number" class="quantity" min="0" value="${quantity}" data-id="${product.id}">
                         <button class="remove-btn" data-id="${product.id}">remove</button>
@@ -41,8 +41,11 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         function updateCart(event) {
+            const productElement = event.target.closest(".product");
             const productId = event.target.dataset.id;
             const quantity = parseInt(event.target.value);
+            let priceText = productElement.querySelector(".product-text p span").textContent;
+            let price = parseFloat(priceText.replace("$", "").trim()); 
             
             if (quantity < 1) {
                 removeFromCart(event);
@@ -53,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (item) {
                 item.quantity = quantity;
             } else {
-                cart.push({ id: productId, quantity });
+                cart.push({ id: productId, quantity, price});
             }
     
             saveCart(cart);
@@ -90,9 +93,9 @@ document.addEventListener("DOMContentLoaded", function() {
         let shipping = cartLength > numProductsIncreaseShip ? maxShip : minShip;
         let finalTotal = totalPrice + shipping;
 
-        document.getElementById("total-price").textContent = `${totalPrice}`;
-        document.getElementById("shipping").textContent = `${shipping}`;
-        document.getElementById("final-total").textContent = `${finalTotal}`;
+        document.getElementById("total-price").textContent = `${totalPrice}$`;
+        document.getElementById("shipping").textContent = `${shipping}$`;
+        document.getElementById("final-total").textContent = `${finalTotal}$`;
     }
 
 

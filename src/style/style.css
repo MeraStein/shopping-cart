@@ -15,7 +15,7 @@
     max-height: 100vh; 
     width: 450%;
     gap: 20px; 
-    border-left: 4px dotted rgb(179, 205, 227);; 
+    border-left: 4px dotted #ccc; 
     margin-left: 2%;
     padding-left: 5%;
     padding-right: 5%;
@@ -65,7 +65,7 @@
 }
 
 #cart-summary {
-    color: rgb(129, 159, 183);
+    color: #5e5858;
     width: 150%;
     display: flex;
     flex-direction: column;
